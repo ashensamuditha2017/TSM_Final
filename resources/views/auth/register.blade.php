@@ -73,7 +73,7 @@
                     <hr class="my-4">
                     <div class="d-grid gap-2">
                         <!-- Font Awesome icon is used here -->
-                        <a href="{{ "" }}" class="btn btn-outline-secondary d-flex align-items-center justify-content-center">
+                        <a href="{{ route('google.auth') }}" class="btn btn-outline-secondary d-flex align-items-center justify-content-center">
                             <i class="fab fa-google me-2"></i>
                             SignUp with Google
                         </a>

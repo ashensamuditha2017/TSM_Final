@@ -28,11 +28,11 @@ class GoogleAuthController extends Controller
                 ]);
                 Auth::login($new_user);
 
-                return redirect()->with('success', 'Registration successful! Welcome, ' . $new_user->name)->intended('dashboard');
+                return redirect()->with('success', 'Registration successful! Welcome, ' . $new_user->name)->intended('home');
             }
             else{
                 Auth::login($user);
-                return redirect()->with('success', 'Login successful! Welcome back, ' . $user->name)->intended('dashboard');
+                return redirect()->with('success', 'Login successful! Welcome back, ' . $user->name)->intended('home');
             }
 
         } catch (\Exception $e) {

@@ -9,11 +9,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function(){
-    return view('dashboard');
+    return view('home');
 })->middleware('auth')->name('dashboard');
 
 Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('google.auth');
-Route::get('auth/google/callback', [GoogleAuthController::class, 'callbackGoogle']);
+Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
 
 
 Auth::routes();
