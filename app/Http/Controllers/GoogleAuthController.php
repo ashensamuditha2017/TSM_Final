@@ -6,37 +6,81 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class GoogleAuthController extends Controller
 {
+    /**
+     * Redirect the user to the Google authentication page.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
     }
 
-    public function callbackGoogle(){
+    /**
+     * Obtain the user information from Google.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function callbackGoogle()
+    {
         try {
+            // Get the user from Google Socialite
             $google_user = Socialite::driver('google')->user();
+
+            // First, try to find a user by their Google ID
             $user = User::where('google_id', $google_user->getId())->first();
 
             if (!$user) {
-                $new_user = User::create([
-                    'name' => $google_user->getName(),
-                    'email' => $google_user->getEmail(),
-                    'google_id' => $google_user->getId(),
-                    'password' => null, // No password for social login
-                ]);
-                Auth::login($new_user);
+                // If a user with that Google ID doesn't exist, check by email
+                $user = User::where('email', $google_user->getEmail())->first();
 
-                return redirect()->with('success', 'Registration successful! Welcome, ' . $new_user->name)->intended('home');
-            }
-            else{
-                Auth::login($user);
-                return redirect()->with('success', 'Login successful! Welcome back, ' . $user->name)->intended('home');
+                if ($user) {
+                    // If a user with this email exists, update their record to link the Google ID
+                    $user->google_id = $google_user->getId();
+                    $user->save();
+                } else {
+                    // If no user exists with either the Google ID or email, create a new one
+                    $user = User::create([
+                        'name' => $google_user->getName(),
+                        'email' => $google_user->getEmail(),
+                        'google_id' => $google_user->getId(),
+                        'password' => null, // Social logins don't require a password
+                    ]);
+                }
             }
 
-        } catch (\Exception $e) {
-            return redirect('/login')->withErrors(['error' => 'Failed to authenticate with Google.']);
+            // Log in the user, whether they were just created or already existed
+            Auth::login($user);
+
+            // Redirect the user to the home page with a success message
+            return redirect()->route('home')->with('success', 'Login successful! Welcome, ' . $user->name);
+
+        } catch (Exception $e) {
+            // Log the error for debugging purposes
+            Log::error('Google authentication failed: ' . $e->getMessage());
+
+            // Redirect to the login page with an error message
+            return redirect()->route('login')->withErrors(['error' => 'Failed to authenticate with Google.']);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        // Logout the user
+        Auth::logout();
+
+        // Invalidate the session
+        $request->session()->invalidate();
+
+        // Regenerate the session's CSRF token
+        $request->session()->regenerateToken();
+
+        // Redirect to the welcome page
+        return redirect('/');
     }
 }
