@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\GoogleDataController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,5 +33,11 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::get('auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('google.auth');
 Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
 
-// Your custom logout route
+// Custom logout route
 Route::post('logout', [GoogleAuthController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/calendar', [GoogleDataController::class, 'showCalendar'])->name('calendar');
+    Route::get('/email', [GoogleDataController::class, 'showEmails'])->name('email');
+    Route::get('/todos', [GoogleDataController::class, 'showToDos'])->name('todos');
+});
