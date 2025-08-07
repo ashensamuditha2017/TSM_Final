@@ -18,7 +18,16 @@ class GoogleAuthController extends Controller
      */
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        // Define the scopes for Calendar, Gmail (read-only), and Tasks.
+        $scopes = [
+            'email',
+            'profile',
+            'https://www.googleapis.com/auth/calendar.readonly',
+            'https://www.googleapis.com/auth/gmail.readonly',
+            'https://www.googleapis.com/auth/tasks.readonly',
+        ];
+
+        return Socialite::driver('google')->scopes($scopes)->with(['access_type' => 'offline', 'prompt' => 'consent'])->redirect();
     }
 
     /**
