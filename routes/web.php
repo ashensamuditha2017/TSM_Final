@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 // The main application home page (dashboard), protected by the 'auth' middleware.
 Route::get('/home', function () {
-    return view('home');
+    return view('dashboard');
 })->middleware('auth')->name('home');
 
 // Login and Register routes
