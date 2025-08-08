@@ -7,7 +7,7 @@
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Laravel%20Socialite-Google%20API%20Integration-brightgreen" alt="Project Badge"></a>
   <a href="#"><img src="https://img.shields.io/badge/PHP-%3E=8.1-blue" alt="PHP Version"></a>
-  <a href="#"><img src="https://img.shields.io/github/license/your-username/your-repo" alt="License"></a>
+  <!-- <a href="#"><img src="https://img.shields.io/github/license/ashensamuditha2017/TSM_Final" alt="License"></a> -->
 </p>
 
 ## About the Project
