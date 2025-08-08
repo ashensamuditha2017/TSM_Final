@@ -83,7 +83,7 @@ Edit `.env` to configure:
 ```env
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
-GOOGLE_REDIRECT_URI=http://127.0.0.1:8000/auth/google/callback
+GOOGLE_REDIRECT_URI=http://127.0.0.1:8000/auth/google/call-back
 ```
 
 You must create a Google Cloud Project and enable:
