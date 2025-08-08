@@ -19,8 +19,21 @@
                             @forelse($events as $event)
                                 <tr>
                                     <td>{{ $event->getSummary() }}</td>
-                                    <td>{{ optional($event->getStart())->getDateTime() ?? 'All day' }}</td>
-                                    <td>{{ optional($event->getEnd())->getDateTime() ?? 'All day' }}</td>
+                                    <td>
+                                        {{-- Check if the event is all-day --}}
+                                        @if ($event->getStart()->getDate())
+                                            {{ \Carbon\Carbon::parse($event->getStart()->getDate())->format('M d, Y') }} (All day)
+                                        @else
+                                            {{ \Carbon\Carbon::parse($event->getStart()->getDateTime())->format('M d, Y H:i A') }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($event->getEnd()->getDate())
+                                            {{ \Carbon\Carbon::parse($event->getEnd()->getDate())->format('M d, Y') }} (All day)
+                                        @else
+                                            {{ \Carbon\Carbon::parse($event->getEnd()->getDateTime())->format('M d, Y H:i A') }}
+                                        @endif
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>

@@ -17,10 +17,11 @@ class GoogleDataController extends Controller
     private function getClient()
     {
         $user = Auth::user();
+        Log::info('User has access token: ' . ($user->google_access_token ? 'Yes' : 'No'));
+        Log::info('User has refresh token: ' . ($user->google_refresh_token ? 'Yes' : 'No'));
 
-        // Check if the user has an access token and refresh token
         if (!$user->google_access_token || !$user->google_refresh_token) {
-            return null; // The user needs to re-authenticate
+            return null;
         }
 
         $client = new Client();
