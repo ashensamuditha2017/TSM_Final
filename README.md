@@ -1,14 +1,14 @@
-<p-align="center">
+<p align="center">
   <a href="https://laravel.com" target="_blank">
     <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
   </a>
-</p-align=>
+</p>
 
-<p-align="center">
+<p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Laravel%20Socialite-Google%20API%20Integration-brightgreen" alt="Project Badge"></a>
   <a href="#"><img src="https://img.shields.io/badge/PHP-%3E=8.1-blue" alt="PHP Version"></a>
   <a href="#"><img src="https://img.shields.io/github/license/your-username/your-repo" alt="License"></a>
-</p-align=>
+</p>
 
 ## About the Project
 
@@ -49,7 +49,7 @@ Ensure you have the following installed:
 Clone the repository:
 
 ```bash
-git clone [your-repository-url]
+git clone [repository-url]
 cd [your-project-directory]
 ````
 
@@ -155,7 +155,4 @@ composer require google/apiclient
 
 This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-```
-
-If you like, I can also make a **version with step-by-step Google Cloud API setup screenshots** so the assignment looks more polished and professional for submission. That would make it visually stronger.
 ```
