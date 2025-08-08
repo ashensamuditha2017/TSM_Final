@@ -49,8 +49,10 @@ class GoogleAuthController extends Controller
                 $user = User::where('email', $google_user->getEmail())->first();
 
                 if ($user) {
-                    // If a user with this email exists, update their record to link the Google ID
+                    // If a user with this email exists, update their record to link the Google ID and save the tokens
                     $user->google_id = $google_user->getId();
+                    $user->google_access_token = $google_user->token;
+                    $user->google_refresh_token = $google_user->refreshToken;
                     $user->save();
                 } else {
                     // If no user exists with either the Google ID or email, create a new one
@@ -58,9 +60,18 @@ class GoogleAuthController extends Controller
                         'name' => $google_user->getName(),
                         'email' => $google_user->getEmail(),
                         'google_id' => $google_user->getId(),
+                        'google_access_token' => $google_user->token,
+                        'google_refresh_token' => $google_user->refreshToken,
                         'password' => null, // Social logins don't require a password
                     ]);
                 }
+            } else {
+                // If the user exists, update their tokens
+                $user->google_access_token = $google_user->token;
+                // The refresh token is often only provided on the first authorization.
+                // Only update it if a new one is available.
+                $user->google_refresh_token = $google_user->refreshToken ?? $user->google_refresh_token;
+                $user->save();
             }
 
             // Log in the user, whether they were just created or already existed
