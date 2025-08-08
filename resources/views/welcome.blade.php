@@ -4,7 +4,7 @@
 <div class="container d-flex align-items-center justify-content-center" style="height: 80vh;">
     <div class="text-center">
         <!-- Main Heading -->
-        <h1 class="display-4 fw-bold text-primary mb-3">Welcome to the Dashboard</h1>
+        <h1 class="display-4 fw-bold text-primary mb-3">Welcome to the Social Login</h1>
         
         <!-- Subheading -->
         <p class="lead text-muted mb-4">Your journey to a better user experience starts here.</p>
