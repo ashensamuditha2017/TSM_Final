@@ -1,61 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p-align="center">
+  <a href="https://laravel.com" target="_blank">
+    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
+  </a>
+</p-align=>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<p-align="center">
+  <a href="#"><img src="https://img.shields.io/badge/Laravel%20Socialite-Google%20API%20Integration-brightgreen" alt="Project Badge"></a>
+  <a href="#"><img src="https://img.shields.io/badge/PHP-%3E=8.1-blue" alt="PHP Version"></a>
+  <a href="#"><img src="https://img.shields.io/github/license/your-username/your-repo" alt="License"></a>
+</p-align=>
 
-## About Laravel
+## About the Project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Laravel Socialite Google API Integration** is a Laravel-based application built for the **CCS4360 - Techniques in Social Media** module.  
+It demonstrates **OAuth 2.0 authentication** and API integration using Laravel Socialite to connect with Google's services, including:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Google Calendar** – Display upcoming events.
+- **Gmail** – Show recent emails.
+- **Google Tasks** – List to-do items.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The application handles **secure Google login** and **automatic token refresh** for persistent access without repeated logins.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Key Features
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- 🔐 **Google OAuth 2.0 Login** via Laravel Socialite.
+- 📅 **Google Calendar API**: Retrieve and display upcoming events.
+- 📧 **Gmail API**: List recent emails.
+- 📝 **Google Tasks API**: Display to-do lists.
+- ♻ **Token Management**: Automatic access token refresh.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Getting Started
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Prerequisites
+Ensure you have the following installed:
+- PHP **8.1+**
+- Composer
+- A web server (Laravel Valet, XAMPP, or PHP built-in server)
+- Node.js & npm
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Installation
 
-## Contributing
+Clone the repository:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone [your-repository-url]
+cd [your-project-directory]
+````
 
-## Code of Conduct
+Install PHP dependencies:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+Install JavaScript dependencies:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+npm install
+```
+
+---
+
+### 3. Environment Setup
+
+Copy `.env.example` to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` to configure:
+
+* Database connection
+* Google OAuth credentials
+
+```env
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+GOOGLE_REDIRECT_URI=http://127.0.0.1:8000/auth/google/callback
+```
+
+You must create a Google Cloud Project and enable:
+
+* **Google Calendar API**
+* **Gmail API**
+* **Google Tasks API**
+
+---
+
+### 4. Database Migration
+
+```bash
+php artisan migrate
+```
+
+---
+
+### 5. Running the Application
+
+Start Laravel backend:
+
+```bash
+php artisan serve
+```
+
+Run frontend build/watch process:
+
+```bash
+npm run dev
+```
+
+Your app will now be running at:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+## Troubleshooting
+
+### 403 Permission Denied
+
+* Ensure APIs are enabled in Google Cloud Console.
+* Wait a few minutes after enabling.
+
+### Login Redirection Issues
+
+* Add your Google account as a **Test User** in OAuth Consent Screen settings.
+
+### Composer Dependency Conflicts
+
+* Update dependencies:
+
+```bash
+composer update --with-all-dependencies
+```
+
+* Or update only Google API client:
+
+```bash
+composer require google/apiclient
+```
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+```
+
+If you like, I can also make a **version with step-by-step Google Cloud API setup screenshots** so the assignment looks more polished and professional for submission. That would make it visually stronger.
+```
